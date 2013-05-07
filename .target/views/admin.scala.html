@@ -1,0 +1,55 @@
+@(users: List[User])
+
+@import helper._
+
+<html>
+    <head>
+    	<title>Yours notes - admin page</title>
+        <link rel="stylesheet" href="@routes.Assets.at("stylesheets/task.css")">
+    </head>
+    <body>
+    	<div id="main">
+    		<div id="left">
+	    		  	<table class="tab" style="margin-left: 15px; width: 370px; margin-left: 120px;">
+	    		  		<tr>
+	  			    	 	<td colspan="2" style="text-align:center; ">
+	  			    	 		<h3>@users.size() users(s)</h3>
+	  			    	 	</td>
+						 </tr> 
+	
+				         @for(user <- users) {
+				         	@if( user.role != 0){
+								 <tr> 
+								     <td style="width:300px; max-width:300px;  word-wrap: break-word;"> @user.email </td>
+							         <td>        
+						                @form(routes.Application.deleteUser(user.email)) {
+						                    <input type="submit" value="delete user">
+						                }
+						             </td>
+								</tr>
+							}
+				        }
+						   
+					</table>	
+			
+			  
+		    </div>
+		    
+		    <div id="right">
+		    	<table cellspacing="30">
+		    		<tr>
+    	    			<td>
+		    				  Hello  <span style="font-size:30px"> ADMIN </span>
+		    			</td>
+		    			<td>
+		    				<span style="font-size:30px"> <a style="text-decoration:none; color: red" href="@routes.Application.logout()">Logout</a> </span>
+		    			</td>
+
+		    		</tr>
+		    	</table>
+		    </div>
+			
+		</div>
+
+    </body>
+</html>
